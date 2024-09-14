@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -13,7 +14,7 @@ const Item = styled(Paper)(({ theme, color }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function UpperGrid({ correctSequence }) {
+function UpperGrid({ correctSequence }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
@@ -26,3 +27,9 @@ export default function UpperGrid({ correctSequence }) {
     </Box>
   );
 }
+
+UpperGrid.propTypes = {
+  correctSequence: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default UpperGrid;

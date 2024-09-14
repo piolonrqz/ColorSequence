@@ -15,7 +15,6 @@ const correctSequence = [
   '#FF8C00'  // Dark Orange (Autumn)
 ];
 
-
 function App() {
   const [shuffledColors, setShuffledColors] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,16 +28,18 @@ function App() {
   const shuffleColors = () => {
     const shuffled = [...correctSequence].sort(() => Math.random() - 0.5);
     setShuffledColors(shuffled);
-    setRevealedColors(Array(9).fill('#FFF5E1')); // Reset all cards to white when shuffled
+    resetGame();
+  };
+
+  const resetGame = () => {
+    setRevealedColors(Array(9).fill('#FFF5E1'));
     setCurrentIndex(0);
-    setReset(true); 
   };
 
   const handleCardClick = (color, index) => {
     if (color === correctSequence[currentIndex]) {
       const newRevealedColors = [...revealedColors];
       newRevealedColors[index] = color; // Reveal the correct color
-
       setRevealedColors(newRevealedColors);
 
       if (currentIndex === correctSequence.length - 1) {
@@ -48,9 +49,8 @@ function App() {
         setCurrentIndex(currentIndex + 1);
       }
     } else {
-      setReset(true); // Coveran ug white balik ang cards
-      setRevealedColors(Array(9).fill('#FFF5E1')); // balik uno
-      setCurrentIndex(0); // Reset the sequence 
+      setReset(true);
+      resetGame();
     }
   };
 
